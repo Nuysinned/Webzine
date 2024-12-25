@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="icon" href="./images/hcuicon.png" />
+    <link rel="stylesheet" href="./stylesheets/default.css" />
+    <title>2025 현대청운고 웹진</title>
+    <style>
+      @font-face {
+        font-family: 'SF_HambakSnow';
+        src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/SF_HambakSnow.woff')
+          format('woff');
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      body {
+        overflow-x: hidden;
+        overflow-y: hidden;
+      }
+
+      #background1 {
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+        background-image: url('./images/vintage.jpg');
+        filter: blur(4px);
+        background-size: cover;
+        transition: opacity 0.5s;
+      }
+
+      #background2 {
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+        background-image: url('./images/vintage2.jpg');
+        filter: blur(4px);
+        background-size: cover;
+        transition: opacity 0.5s;
+      }
+
+      #Title {
+        font-family: 'SF_HambakSnow';
+        position: absolute;
+        transform: translate(-50%, -50%);
+        left: 50%;
+        text-align: center;
+        width: 100%;
+        color: white;
+      }
+
+      #webzine {
+        transition: color 0.5s;
+      }
+
+      .skin {
+        color: rgb(255, 211, 154);
+      }
+      .blue {
+        color: rgb(148, 180, 240);
+      }
+
+      #BottomText {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        left: 50%;
+        font-family: 'SF_HambakSnow';
+        text-align: center;
+        width: 100%;
+        transition: color 0.5s;
+      }
+      .brown {
+        color: brown;
+      }
+      .green {
+        color: rgb(0, 159, 154);
+      }
+
+      #LeftArrow,
+      #RightArrow {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        transition: transform 0.2s !important;
+        top: 50%;
+      }
+
+      #LeftArrow:hover,
+      #RightArrow:hover {
+        transform: translate(-50%, -50%) scale(1.3);
+      }
+
+      #LeftArrow:active,
+      #RightArrow:active {
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      iframe {
+        display: block;
+        position: absolute;
+        top: 0;
+        border: none;
+        width: 100vw;
+        height: 100vh;
+        transition: left 0.3s, top 0.3s !important;
+      }
+
+      #SoundOnOff {
+        position: absolute;
+        right: 40px;
+        top: 20px;
+        width: 60px;
+        transition: transform 0.2s !important;
+      }
+
+      #SoundOnOff:hover {
+        transform: scale(1.3);
+      }
+
+      #SoundOnOff:active {
+        transform: scale(1);
+      }
+
+      .left100 {
+        left: 100%;
+      }
+      .left0 {
+        left: 0;
+      }
+      .leftminus100 {
+        left: -100%;
+      }
+
+      .top100 {
+        top: 100%;
+      }
+      .top0 {
+        top: 0;
+      }
+      .topminus100 {
+        top: -100%;
+      }
+
+      .opacity0 {
+        opacity: 0 !important;
+      }
+      .opacity1 {
+        opacity: 1 !important;
+      }
+
+      .displaynone {
+        display: none;
+      }
+      .displayblock {
+        display: block;
+      }
+
+      #SoundOnOff,
+      #BottomText,
+      #RightArrow,
+      #LeftArrow {
+        transition: opacity 0.2s;
+      }
+
+      #ToGQ {
+        font-size: 15px;
+        position: absolute;
+        bottom: 10px;
+        right: 20px;
+      }
+
+      #LookAll {
+        color: black;
+        background-color: white;
+        position: absolute;
+        text-align: center;
+        font-family: 'SF_HambakSnow';
+        border-radius: 100%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.2s, opacity 0.5s !important;
+      }
+
+      #LookAll:hover {
+        transform: translate(-50%, -50%) scale(1.2) !important;
+      }
+
+      #LookAll:active {
+        transform: translate(-50%, -50%) scale(1) !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="background1" class="opacity1"></div>
+    <div id="background2" class="opacity0"></div>
+    <iframe id="Select" class="top100"></iframe>
+    <iframe id="Regular" class="left0 top0" src="./pages/regular.html"></iframe>
+    <iframe id="Self" class="left100 top0" src="./pages/self.html"></iframe>
+    <div id="Title" class="opacity1 displayblock">
+      <div id="MainMessage">
+        2025 현대청운고등학교 동아리 홍보
+        <span id="webzine" class="skin">웹진</span>
+      </div>
+      <div id="WelcomeMessage">신입생 여러분의 본교 입학을 축하합니다.</div>
+    </div>
+    <div id="BottomText" class="opacity1 brown displayblcok">
+      버튼을 잡고 다이얼이 걸릴 때까지 시계 방향으로 끝까지 돌리세요.<br />가운데를
+      누르면 전체 리스트가 나옵니다.
+    </div>
+    <img
+      id="RightArrow"
+      class="opacity1"
+      src="./images/rightarrow.png"
+      alt="rightarrow"
+    />
+    <img
+      id="LeftArrow"
+      class="opacity0"
+      src="./images/leftarrow.png"
+      alt="leftarrow"
+    />
+    <div id="LookAll" class="opacity1">전체<br />보기</div>
+    <img
+      id="SoundOnOff"
+      class="opacity1"
+      src="./images/soundoff.png"
+      alt="sound"
+    />
+    <div id="ToGQ">I love you G.Q.</div>
+
+    <script src="./javascripts/Screen.js"></script>
+    <script>
+      // GLOBAL VARIABLES AREA
+      let sound = 'off';
+      const Regular = document.querySelector('#Regular');
+      const Self = document.querySelector('#Self');
+      const Select = document.querySelector('#Select');
+      const background1 = document.querySelector('#background1');
+      const background2 = document.querySelector('#background2');
+      const webzine = document.querySelector('#webzine');
+      const LookAll = document.querySelector('#LookAll');
+      let where = '';
+      let main = 'Regular';
+
+      // TITLE SIZE & LOCATION AREA
+      const Title = document.querySelector('#Title');
+      const MainMessage = document.querySelector('#MainMessage');
+      const WelcomeMessage = document.querySelector('#WelcomeMessage');
+      function changeTitle() {
+        const TitleY = (Screen.height - Screen.min * 0.7) / 4;
+        const MainMessageSize = Screen.min * 0.05;
+        const WelcomeMessageSize = Screen.min * 0.03;
+        MainMessage.style.fontSize = MainMessageSize + 'px';
+        WelcomeMessage.style.fontSize = WelcomeMessageSize + 'px';
+        Title.style.top = TitleY + 'px';
+      }
+      changeTitle();
+
+      // BottomText SIZE & LOCATION AREA
+      const BottomText = document.querySelector('#BottomText');
+      function changeBottom() {
+        const BottomTextSize = Screen.min * 0.03;
+        const BottomTextY =
+          Screen.height - (Screen.height - Screen.min * 0.7) / 4;
+        BottomText.style.fontSize = BottomTextSize + 'px';
+        BottomText.style.top = BottomTextY + 'px';
+      }
+      changeBottom();
+
+      // ARROWS SIZE & LOCATION AREA
+      const LeftArrow = document.querySelector('#LeftArrow');
+      const RightArrow = document.querySelector('#RightArrow');
+      function changeArrows() {
+        const ArrowWidth = Screen.min * 0.07;
+        const LeftArrowX = (Screen.width - Screen.min * 0.7) / 4;
+        LeftArrow.style.width = ArrowWidth + 'px';
+        RightArrow.style.width = ArrowWidth + 'px';
+        if (main === 'Self') {
+          LookAll.style.left = (Screen.width - Screen.min * 0.7) / 4 + 'px';
+        } else {
+          LookAll.style.left =
+            Screen.width - (Screen.width - Screen.min * 0.7) / 4 + 'px';
+        }
+        LeftArrow.style.left = LeftArrowX + 'px';
+        RightArrow.style.left = Screen.width - LeftArrowX + 'px';
+      }
+      changeArrows();
+
+      // LOOKALL AREA
+      function changeLookAll() {
+        const LookAllWidth = Screen.min * 0.09;
+        const LookAllX = (Screen.width - Screen.min * 0.7) / 4;
+        const LookAllFontSize = Screen.min * 0.03;
+        LookAll.style.width = LookAllWidth + 'px';
+        LookAll.style.height = LookAllWidth + 'px';
+        LookAll.style.left = LookAllX + 'px';
+        LookAll.style.fontSize = LookAllFontSize + 'px';
+      }
+      changeLookAll();
+
+      // LOOKALL EVENTLISTENER AREA
+      LookAll.addEventListener('click', () => {
+        goto('전체동아리');
+      });
+
+      // EVENTLISTENER RUNNER AREA
+      window.addEventListener('resize', () => {
+        changeTitle();
+        changeBottom();
+        changeArrows();
+        changeLookAll();
+      });
+
+      // DIAL TRANSITION AREA
+      RightArrow.addEventListener('click', () => {
+        changeArrows();
+        if (main === 'Regular') {
+          Regular.classList.remove('left0');
+          Regular.classList.add('leftminus100');
+          Self.classList.remove('left100');
+          Self.classList.add('left0');
+          RightArrow.classList.remove('opacity1');
+          RightArrow.classList.add('opacity0');
+          LeftArrow.classList.remove('opacity0');
+          LeftArrow.classList.add('opacity1');
+          background1.classList.remove('opacity1');
+          background1.classList.add('opacity0');
+          background2.classList.remove('opacity0');
+          background2.classList.add('opacity1');
+          BottomText.classList.remove('brown');
+          BottomText.classList.add('green');
+          webzine.classList.remove('skin');
+          webzine.classList.add('blue');
+
+          main = 'Self';
+        }
+        if (main === 'Self') {
+        }
+      });
+      LeftArrow.addEventListener('click', () => {
+        changeArrows();
+        if (main === 'Regular') {
+        }
+        if (main === 'Self') {
+          Regular.classList.remove('leftminus100');
+          Regular.classList.add('left0');
+          Self.classList.remove('left0');
+          Self.classList.add('left100');
+          RightArrow.classList.remove('opacity0');
+          RightArrow.classList.add('opacity1');
+          LeftArrow.classList.remove('opacity1');
+          LeftArrow.classList.add('opacity0');
+          background1.classList.remove('opacity0');
+          background1.classList.add('opacity1');
+          background2.classList.remove('opacity1');
+          background2.classList.add('opacity0');
+          BottomText.classList.remove('green');
+          BottomText.classList.add('brown');
+          webzine.classList.remove('blue');
+          webzine.classList.add('skin');
+          main = 'Regular';
+        }
+      });
+
+      // SOUNDONOFF AREA
+      const SoundOnOff = document.querySelector('#SoundOnOff');
+      SoundOnOff.addEventListener('click', () => {
+        if (sound === 'off') {
+          sound = 'on';
+          SoundOnOff.src = './images/soundon.png';
+        } else if (sound === 'on') {
+          sound = 'off';
+          SoundOnOff.src = './images/soundoff.png';
+        }
+      });
+
+      // FUNCTION THAT THE CHILDREN WILL USE
+      function goto(string) {
+        Regular.classList.remove('top0');
+        Regular.classList.add('topminus100');
+        Self.classList.remove('top0');
+        Self.classList.add('topminus100');
+        Select.classList.remove('top100');
+        Select.classList.add('top0');
+
+        Title.classList.remove('opacity1');
+        Title.classList.add('opacity0');
+        BottomText.classList.remove('opacity1');
+        BottomText.classList.add('opacity0');
+        LeftArrow.classList.remove('opacity1');
+        LeftArrow.classList.add('opacity0');
+        RightArrow.classList.remove('opacity1');
+        RightArrow.classList.add('opacity0');
+        SoundOnOff.classList.remove('opacity1');
+        SoundOnOff.classList.add('opacity0');
+        LookAll.classList.remove('opacity1');
+        LookAll.classList.add('opacity0');
+
+        where = string;
+        Select.src = './pages/select.html';
+
+        setTimeout(() => {
+          Title.classList.remove('displayblock');
+          Title.classList.add('displaynone');
+          BottomText.classList.remove('displayblock');
+          BottomText.classList.add('displaynone');
+        }, 500);
+      }
+
+      function getSound() {
+        return sound;
+      }
+
+      function giveMeInformation() {
+        return {
+          kind: where,
+        };
+      }
+
+      function goBack() {
+        Title.classList.remove('displaynone');
+        Title.classList.add('displayblock');
+
+        Regular.classList.remove('topminus100');
+        Regular.classList.add('top0');
+        Self.classList.remove('topminus100');
+        Self.classList.add('topminus0');
+        Select.classList.remove('top0');
+        Select.classList.add('top100');
+
+        Title.classList.remove('opacity0');
+        Title.classList.add('opacity1');
+        BottomText.classList.remove('opacity0');
+        BottomText.classList.add('opacity1');
+        if (main === 'Regular') {
+          RightArrow.classList.remove('opacity0');
+          RightArrow.classList.add('opacity1');
+        }
+        if (main === 'Self') {
+          LeftArrow.classList.remove('opacity0');
+          LeftArrow.classList.add('opacity1');
+        }
+        SoundOnOff.classList.remove('opacity0');
+        SoundOnOff.classList.add('opacity1');
+
+        BottomText.classList.remove('displaynone');
+        BottomText.classList.add('displayblock');
+
+        LookAll.classList.remove('opacity0');
+        LookAll.classList.add('opacity1');
+
+        setTimeout(() => {
+          Select.src = '';
+        }, 500);
+      }
+    </script>
+  </body>
+</html>

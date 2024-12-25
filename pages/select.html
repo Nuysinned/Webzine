@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="../stylesheets/default.css" />
+    <style>
+      @font-face {
+        font-family: 'SF_HambakSnow';
+        src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/SF_HambakSnow.woff')
+          format('woff');
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      /* body::-webkit-scrollbar {
+        display: none !important;
+      } */
+      body {
+        overflow-y: hidden;
+      }
+
+      #Home {
+        display: flex;
+        flex-direction: row;
+        height: 100vh;
+        overflow-y: hidden;
+        align-items: center;
+        gap: 5%;
+        scrollbar-width: none;
+      }
+
+      .Paper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-size: cover;
+        aspect-ratio: 1 / 1.77;
+        transition: transform 0.2s;
+      }
+
+      .Sort {
+        display: flex;
+        position: relative;
+        font-family: 'SF_HambakSnow';
+        top: 21%;
+        align-content: center;
+        justify-self: center;
+      }
+
+      .SortPart1 {
+        text-align: center;
+        flex-grow: 1;
+        border-radius: 50px 0 0 50px;
+        padding: 3% 0 3% 0;
+      }
+      .SortPart2 {
+        text-align: center;
+        flex-grow: 1;
+        border-radius: 0 50px 50px 0;
+        padding: 3% 0 3% 0;
+      }
+
+      .Logo {
+        position: relative;
+        width: 40%;
+        top: 24%;
+        border-radius: 15%;
+        transform: scale(1.1);
+      }
+
+      .Name {
+        position: relative;
+        top: 26%;
+        font-family: 'SF_HambakSnow';
+      }
+
+      .Keyword {
+        position: relative;
+        top: 26%;
+        font-family: 'SF_HambakSnow';
+        background-color: black;
+        color: white;
+        border-radius: 50px;
+        padding: 1% 5% 1% 5%;
+      }
+
+      .Sentence {
+        text-align: justify;
+        position: relative;
+        top: 27.5%;
+        font-family: 'SF_HambakSnow';
+        width: 45%;
+      }
+
+      .RegularColor {
+        background-color: black;
+        color: white;
+      }
+      .SelfColor1 {
+        background-color: white;
+        color: black;
+      }
+      .SelfColor2 {
+        background-color: gray;
+        color: white;
+      }
+
+      .MedicalColor {
+        background-color: coral;
+      }
+      .ScienceColor {
+        background-color: blueviolet;
+        color: white;
+      }
+      .SocialColor {
+        background-color: cornflowerblue;
+      }
+      .EngineerColor {
+        background-color: chartreuse;
+      }
+      .SportsColor {
+        background-color: cyan;
+      }
+      .PerformanceColor {
+        background-color: brown;
+      }
+      .HelpColor {
+        background-color: darkcyan;
+      }
+      .SpecialColor {
+        background-color: gold;
+      }
+      .CreateColor {
+        background-color: peru;
+      }
+      .JoinColor {
+        background-color: hotpink;
+      }
+
+      .xoverflow {
+        overflow: hidden !important;
+      }
+
+      img {
+        width: 400px;
+      }
+
+      #WhereIsHere {
+        position: absolute;
+        bottom: 20px;
+        left: 40px;
+        font-size: 30px;
+        font-family: 'SF_HambakSnow';
+        color: white;
+      }
+
+      #GoBack {
+        position: absolute;
+        top: 20px;
+        left: 40px;
+        width: 50px;
+        transition: transform 0.2s;
+      }
+
+      #GoBack:hover {
+        transform: scale(1.2);
+      }
+
+      #GoBack:active {
+        transform: scale(1);
+      }
+
+      #Search {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 100px;
+        border: 0 solid black;
+        background-color: gray;
+        padding: 10px;
+        outline: none;
+        color: white;
+      }
+
+      #Search::placeholder {
+        color: white;
+      }
+    </style>
+    <!-- 비뮬 : 1:1.77 -->
+  </head>
+  <body>
+    <div id="Home"></div>
+    <div id="WhereIsHere"></div>
+    <img id="GoBack" src="../images/goback.png" alt="goback" />
+    <input id="Search" placeholder="검색하세요. 🔍" />
+    <button></button>
+    <script src="../javascripts/Screen.js"></script>
+    <script src="../javascripts/Clubs.js"></script>
+    <script>
+      // GLOBAL VARIABLES AREA
+      const informationAboutThisPlace = window.parent.giveMeInformation();
+      const Home = document.querySelector('#Home');
+      let initClubList;
+      let clubList;
+
+      switch (informationAboutThisPlace.kind) {
+        case '정규동아리':
+          initClubList = clubs.filter((v) => v.time === '목7');
+          break;
+        case '자율동아리':
+          initClubList = clubs.filter(
+            (v) => v.time === '목8' || v.time === '토4'
+          );
+          break;
+        case '전체동아리':
+          initClubList = clubs;
+          break;
+        default:
+          initClubList = clubs.filter(
+            (v) => v.kind === informationAboutThisPlace.kind
+          );
+      }
+
+      clubList = initClubList;
+
+      // PAPER MAKING AREA
+      function makingPapers() {
+        clubList.forEach((information, index) => {
+          const PaperElement = document.createElement('div');
+          const SortElement = document.createElement('div');
+          const SortPart1 = document.createElement('div');
+          const SortPart2 = document.createElement('div');
+          const LogoElement = document.createElement('img');
+          const NameElement = document.createElement('div');
+          const KeywordElement = document.createElement('div');
+          const SentenceElement = document.createElement('div');
+
+          PaperElement.classList.add('Paper');
+          SortElement.classList.add('Sort');
+          SortPart1.classList.add('SortPart1');
+          SortPart2.classList.add('SortPart2');
+          LogoElement.classList.add('Logo');
+          NameElement.classList.add('Name');
+          KeywordElement.classList.add('Keyword');
+          SentenceElement.classList.add('Sentence');
+
+          if (information.name === 'DIXIT' || information.name === 'Palette') {
+            PaperElement.style.backgroundImage = "url('../images/paper2.png')";
+          } else {
+            PaperElement.style.backgroundImage = "url('../images/paper.png')";
+          }
+
+          SortPart1.textContent = ['정규', '주중자율', '주말자율'][
+            ['목7', '목8', '토4'].findIndex((v) => v === clubList[index].time)
+          ];
+          SortPart2.textContent = information.kind;
+          LogoElement.src = `../logos/${information.name}.png`;
+          NameElement.textContent = information.name;
+          KeywordElement.textContent = information.keyword;
+          SentenceElement.textContent = information.sentence;
+
+          if (information.name === 'BLUECROSS') {
+            NameElement.style.transform = 'scale(0.6)';
+          }
+          if (
+            [
+              '매치포인트',
+              'INTERPOL',
+              '하늘바라기',
+              'HCUtube',
+              '강약중강약',
+            ].findIndex((v) => v === information.name) !== -1
+          ) {
+            NameElement.style.transform = 'scale(0.8)';
+          }
+
+          PaperElement.addEventListener('click', () => {
+            window
+              .open(`../documents/${information.name}.html`, '_blank')
+              .focus();
+          });
+
+          PaperElement.addEventListener('mouseover', () => {
+            clubList[index].big = true;
+            homeOnScroll();
+          });
+
+          PaperElement.addEventListener('mouseout', () => {
+            clubList[index].big = false;
+            homeOnScroll();
+          });
+
+          SortElement.append(SortPart1, SortPart2);
+          PaperElement.append(
+            SortElement,
+            LogoElement,
+            NameElement,
+            KeywordElement,
+            SentenceElement
+          );
+          Home.append(PaperElement);
+        });
+      }
+      makingPapers();
+
+      // PAPER SIZE & LOCATION AREA
+      function changePapers() {
+        const Papers = document.querySelectorAll('.Paper');
+        const benchMark = Screen.width / 2;
+        Papers.forEach((Paper, index) => {
+          Paper.style.height = Screen.height * 0.8 + 'px';
+        });
+      }
+      changePapers();
+
+      // SORTS AREA
+      function changeSorts() {
+        const Sorts = document.querySelectorAll('.Sort');
+        const SortPart1s = document.querySelectorAll('.SortPart1');
+        const SortPart2s = document.querySelectorAll('.SortPart2');
+        Sorts.forEach((Sort, index) => {
+          Sort.style.width = Screen.height * 0.19 + 'px';
+          Sort.style.fontSize = Screen.height * 0.022 + 'px';
+          SortPart1s[index].classList.add(
+            ['RegularColor', 'SelfColor1', 'SelfColor2'][
+              ['목7', '목8', '토4'].findIndex((v) => v === clubList[index].time)
+            ]
+          );
+          SortPart2s[index].classList.add(
+            [
+              'MedicalColor',
+              'ScienceColor',
+              'SocialColor',
+              'EngineerColor',
+              'SportsColor',
+              'PerformanceColor',
+              'HelpColor',
+              'SpecialColor',
+              'CreateColor',
+              'JoinColor',
+            ][
+              [
+                '메디컬',
+                '과학',
+                '사회',
+                '공학',
+                '스포츠',
+                '퍼포먼스',
+                '봉사',
+                '특별활동',
+                '창작',
+                '융합',
+              ].findIndex((v) => v === clubList[index].kind)
+            ]
+          );
+        });
+      }
+      changeSorts();
+
+      // NAME SIZE AREA
+      function changeNameSize() {
+        const Names = document.querySelectorAll('.Name');
+        Names.forEach((Name) => {
+          Name.style.fontSize = Screen.height * 0.07 + 'px';
+        });
+      }
+      changeNameSize();
+
+      // KEYWORD FONT SIZE AREA
+      function changeKeywordFontSize() {
+        const Keywords = document.querySelectorAll('.Keyword');
+        Keywords.forEach((Keyword) => {
+          Keyword.style.fontSize = Screen.height * 0.02 + 'px';
+        });
+      }
+      changeKeywordFontSize();
+
+      // SENTENCE FONT SIZE AREA
+      function changeSentenceFontSize() {
+        const Sentences = document.querySelectorAll('.Sentence');
+        Sentences.forEach((Sentence) => {
+          Sentence.style.fontSize = Screen.height * 0.02 + 'px';
+        });
+      }
+      changeSentenceFontSize();
+
+      // HOMEPADDING AREA
+      function changeHomePadding() {
+        Home.style.padding = `0 ${
+          Screen.width / 2 - (Screen.height * 0.8) / 1.77 / 2
+        }px 0 ${Screen.width / 2 - (Screen.height * 0.8) / 1.77 / 2}px`;
+      }
+      changeHomePadding();
+
+      // SEARCH AREA
+      function changeSearch() {
+        const Search = document.querySelector('#Search');
+        Search.style.width = Screen.width * 0.4 + 'px';
+        Search.style.fontSize = Screen.height * 0.02 + 'px';
+        Search.style.bottom = Screen.height * 0.001 + 'px';
+      }
+      changeSearch();
+
+      // SEARCHING AREA
+      Search.addEventListener('input', () => {
+        const inputed = Search.value.replaceAll(' ', '').toUpperCase();
+        clubList = initClubList.filter((v) => {
+          if (
+            v.name.replaceAll(' ', '').toUpperCase().indexOf(inputed) !== -1 ||
+            ['정규동아리', '주중자율동아리', '주말자율동아리'][
+              ['목7', '목8', '토4'].findIndex((vv) => vv === v.time)
+            ].indexOf(inputed) !== -1 ||
+            v.kind.replaceAll(' ', '').toUpperCase().indexOf(inputed) !== -1 ||
+            v.keyword.replaceAll(' ', '').toUpperCase().indexOf(inputed) !==
+              -1 ||
+            v.sentence.replaceAll(' ', '').toUpperCase().indexOf(inputed) !==
+              -1 ||
+            v.nickname.replaceAll(' ', '').toUpperCase().indexOf(inputed) !== -1
+          ) {
+            return true;
+          }
+          return false;
+        });
+        document.querySelectorAll('.Paper').forEach((element) => {
+          element.remove();
+        });
+        makingPapers();
+        changePapers();
+        changeSorts();
+        changeNameSize();
+        changeKeywordFontSize();
+        changeSentenceFontSize();
+      });
+
+      window.addEventListener('resize', () => {
+        changePapers();
+        changeSorts();
+        changeNameSize();
+        changeKeywordFontSize();
+        changeSentenceFontSize();
+        changeHomePadding();
+        changeSearch();
+      });
+
+      // WHEN SCROLLING AREA
+      function homeOnScroll() {
+        const Papers = document.querySelectorAll('.Paper');
+        Papers.forEach((Paper, index) => {
+          const rect = Paper.getBoundingClientRect();
+          Paper.style.transform =
+            `scale(${clubList[index].big ? 1.1 : 1})` +
+            (clubList[index].big ? 'rotate(10deg) translate(10%, -10%)' : '');
+          Paper.style.filter = `brightness(${
+            1 - Math.abs((rect.left + rect.right) / 2 - Screen.width / 2) / 1000
+          }`;
+        });
+      }
+      homeOnScroll();
+      Home.onscroll = homeOnScroll;
+
+      // WHEREISHERE AREA
+      const WhereIsHere = document.querySelector('#WhereIsHere');
+      WhereIsHere.textContent = informationAboutThisPlace.kind;
+
+      // GOBACK AREA
+      const GoBack = document.querySelector('#GoBack');
+      GoBack.addEventListener('click', () => {
+        setTimeout(() => {
+          window.parent.goBack();
+        }, 200);
+      });
+    </script>
+  </body>
+</html>
