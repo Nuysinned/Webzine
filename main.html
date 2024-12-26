@@ -503,6 +503,10 @@
           // 아이폰스러운 스크롤 구현하는 곳
         }
       });
+
+      window.addEventListener('popstate', (e) => {
+        goBack();
+      });
     </script>
   </body>
 </html>
