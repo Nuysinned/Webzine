@@ -2,6 +2,12 @@
 <html>
   <head>
     <link rel="stylesheet" href="../stylesheets/default.css" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, 
+maximum-scale=1.0, minimum-scale=1.0"
+    />
+
     <style>
       @font-face {
         font-family: 'SF_HambakSnow';
@@ -330,7 +336,7 @@
         ) {
           if (baricadeCrossingRecords.length === 0) {
             baricadeCrossingRecords.push([RL, 1]);
-            standardMouse = { x: Screen.width, y: 1000 };
+            standardMouse = { x: Screen.width, y: 10000 };
             return;
           }
           if (
@@ -342,11 +348,11 @@
               -1
             ) {
               baricadeCrossingRecords.pop();
-              standardMouse = { x: Screen.width, y: 1000 };
+              standardMouse = { x: Screen.width, y: 10000 };
             }
           } else {
             baricadeCrossingRecords.push([RL, 1]);
-            standardMouse = { x: Screen.width, y: 1000 };
+            standardMouse = { x: Screen.width, y: 10000 };
           }
         }
       }
@@ -416,8 +422,14 @@
         currentMouse.y = e.pageY;
       });
 
+      document.addEventListener('touchmove', (e) => {
+        const touch = e.changedTouches[0];
+        currentMouse.x = touch.pageX;
+        currentMouse.y = touch.pageY;
+      });
+
       // MOUSE INITIAL LOCATION STORING AREA
-      document.onmousedown = () => {
+      function downAction() {
         pressedMouse = { ...currentMouse };
         const lengths = locations.map((v) =>
           Math.sqrt(
@@ -427,10 +439,23 @@
         );
         selected =
           contents[lengths.findIndex((v) => v === Math.min(...lengths))];
-      };
-      document.onmouseup = () => {
+      }
+
+      function upAction() {
         pressedMouse = { x: 1, y: -1 };
-      };
+      }
+      document.onmousedown = downAction;
+
+      document.onmouseup = upAction;
+
+      document.addEventListener('touchstart', (e) => {
+        const touch = e.changedTouches[0];
+        currentMouse.x = touch.pageX;
+        currentMouse.y = touch.pageY;
+        downAction();
+      });
+
+      document.addEventListener('touchend', upAction);
 
       // AUDIO CONTROLLING AREA
       setInterval(() => {

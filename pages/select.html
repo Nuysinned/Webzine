@@ -141,6 +141,9 @@ maximum-scale=1.0, minimum-scale=1.0"
       .JoinColor {
         background-color: hotpink;
       }
+      .MathColor {
+        background-color: darkolivegreen;
+      }
 
       .xoverflow {
         overflow: hidden !important;
@@ -185,6 +188,7 @@ maximum-scale=1.0, minimum-scale=1.0"
         padding: 10px;
         outline: none;
         color: white;
+        bottom: 0;
       }
 
       #Search::placeholder {
@@ -274,6 +278,7 @@ maximum-scale=1.0, minimum-scale=1.0"
               '하늘바라기',
               'HCUtube',
               '강약중강약',
+              'SYNAPSE',
             ].findIndex((v) => v === information.name) !== -1
           ) {
             NameElement.style.transform = 'scale(0.8)';
@@ -343,6 +348,7 @@ maximum-scale=1.0, minimum-scale=1.0"
               'SpecialColor',
               'CreateColor',
               'JoinColor',
+              'MathColor',
             ][
               [
                 '메디컬',
@@ -355,6 +361,7 @@ maximum-scale=1.0, minimum-scale=1.0"
                 '특별활동',
                 '창작',
                 '융합',
+                '수학',
               ].findIndex((v) => v === clubList[index].kind)
             ]
           );
@@ -402,7 +409,6 @@ maximum-scale=1.0, minimum-scale=1.0"
         const Search = document.querySelector('#Search');
         Search.style.width = Screen.width * 0.4 + 'px';
         Search.style.fontSize = Screen.height * 0.02 + 'px';
-        Search.style.bottom = Screen.height * 0.001 + 'px';
       }
       changeSearch();
 
@@ -473,6 +479,11 @@ maximum-scale=1.0, minimum-scale=1.0"
         setTimeout(() => {
           window.parent.goBack();
         }, 200);
+      });
+      GoBack.addEventListener('touch', () => {
+        setTimeout(() => {
+          window.parent.goBack();
+        });
       });
     </script>
   </body>
