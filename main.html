@@ -21,12 +21,14 @@
       body {
         overflow-x: hidden;
         overflow-y: hidden;
+        height: 100%;
+        width: 100%;
       }
 
       #background1 {
         position: absolute;
         width: 100%;
-        height: 100vh;
+        height: 100%;
         background-image: url('./images/vintage.jpg');
         filter: blur(4px);
         background-size: cover;
@@ -247,6 +249,7 @@
       const LookAll = document.querySelector('#LookAll');
       let where = '';
       let main = 'Regular';
+      let moved = false;
 
       // TITLE SIZE & LOCATION AREA
       const Title = document.querySelector('#Title');
@@ -405,6 +408,8 @@
         where = string;
         Select.src = './pages/select.html';
 
+        moved = true;
+
         setTimeout(() => {
           Title.classList.remove('displayblock');
           Title.classList.add('displaynone');
@@ -455,10 +460,49 @@
         LookAll.classList.remove('opacity0');
         LookAll.classList.add('opacity1');
 
+        moved = false;
+
         setTimeout(() => {
           Select.src = '';
         }, 500);
       }
+
+      // IOS SCROLL AREA
+      let currentMouse = { x: -1, y: -1 };
+      let pressedMouse = { x: -1, y: -1 };
+      document.addEventListener('mousemove', (e) => {
+        currentMouse = { x: e.pageX, y: e.pageY };
+      });
+      document.addEventListener('touchmove', (e) => {
+        const touch = e.changedTouches[0];
+        currentMouse.x = touch.pageX;
+        currentMouse.y = touch.pageY;
+      });
+
+      function downAction() {
+        pressedMouse = { ...currentMouse };
+      }
+
+      function upAction() {
+        pressedMouse = { x: -1, y: -1 };
+      }
+
+      document.onmousedown = downAction;
+      document.onmouseup = upAction;
+
+      document.addEventListener('touchstart', (e) => {
+        const touch = e.changedTouches[0];
+        currentMouse.x = touch.pageX;
+        currentMouse.y = touch.pageY;
+        downAction();
+      });
+      document.addEventListener('touchend', upAction);
+
+      setInterval(() => {
+        if (moved === true) {
+          // 아이폰스러운 스크롤 구현하는 곳
+        }
+      });
     </script>
   </body>
 </html>
