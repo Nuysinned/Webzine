@@ -337,6 +337,10 @@
       //   main = 'Self';
       // }
 
+      // FOR FAST LOADING
+      where = '전체동아리';
+      Select.src = './pages/select.html';
+
       setInterval(() => {
         Regular.style.top = standardTop + 'px';
         Regular.style.top = standardTop + 'px';
@@ -494,6 +498,8 @@
         SoundOnOff.classList.add('opacity0');
         LookAll.classList.remove('opacity1');
         LookAll.classList.add('opacity0');
+
+        Select.src = '';
 
         where = string;
         Select.src = './pages/select.html';
