@@ -307,7 +307,10 @@
           KeywordElement.textContent = information.keyword;
           SentenceElement.textContent = information.sentence;
 
-          if (information.name === 'BLUECROSS') {
+          if (
+            information.name === 'BLUECROSS' ||
+            information.name === 'Reason Party'
+          ) {
             NameElement.style.transform = 'scale(0.6)';
           }
           if (

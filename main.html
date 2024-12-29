@@ -238,7 +238,16 @@
 
     <script src="./javascripts/Screen.js"></script>
     <script>
+      // URL AREA
+      let url = {};
+      window.location.search.split('?').forEach((value, index) => {
+        if (index === 0) return;
+        const [one, two] = value.split('=');
+        url[one] = two;
+      });
+
       // GLOBAL VARIABLES AREA
+      console.log(window.location.search);
       let sound = 'off';
       const Regular = document.querySelector('#Regular');
       const Self = document.querySelector('#Self');
@@ -250,6 +259,14 @@
       let where = '';
       let main = 'Regular';
       let moved = false;
+
+      // INITIONAL SETTING
+      if (url.from === 'RegularDial') {
+        main = 'Regular';
+      }
+      if (url.from === 'SelfDial') {
+        main = 'Self';
+      }
 
       // TITLE SIZE & LOCATION AREA
       const Title = document.querySelector('#Title');

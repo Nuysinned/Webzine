@@ -381,4 +381,23 @@ const clubs = [
     big: false,
     nickname: '앱스이비에스',
   },
+  {
+    name: 'DNT',
+    time: '목7',
+    kind: '수학',
+    keyword: '수학',
+    sentence:
+      '다양한 연합 탐구를 진행하고 이를 활용한 단계적 개별 탐구를 통해 수학뿐만이 아니라 다양한 학문을 수학을 토대로 깊이 있게 탐구합니다.',
+    big: false,
+    nickname: '디엔티',
+  },
+  {
+    name: 'Reason Party',
+    time: '토4',
+    kind: '특별활동',
+    keyword: '계몽, 사회참여, 종교, 철학',
+    sentence: '철학을 정립하는 것을 넘어서 몸소 실천하는 갓동',
+    big: false,
+    nickname: '리즌파티',
+  },
 ];
