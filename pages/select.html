@@ -110,41 +110,6 @@ maximum-scale=1.0, minimum-scale=1.0"
         color: white;
       }
 
-      /* .MedicalColor {
-        background-color: coral;
-      }
-      .ScienceColor {
-        background-color: blueviolet;
-        color: white;
-      }
-      .SocialColor {
-        background-color: cornflowerblue;
-      }
-      .EngineerColor {
-        background-color: chartreuse;
-      }
-      .SportsColor {
-        background-color: cyan;
-      }
-      .PerformanceColor {
-        background-color: brown;
-      }
-      .HelpColor {
-        background-color: darkcyan;
-      }
-      .SpecialColor {
-        background-color: gold;
-      }
-      .CreateColor {
-        background-color: peru;
-      }
-      .JoinColor {
-        background-color: hotpink;
-      }
-      .MathColor {
-        background-color: darkolivegreen;
-      } */
-
       .MedicalColor {
         background-image: url('../images/colors/1.png');
         color: white;
@@ -313,7 +278,10 @@ maximum-scale=1.0, minimum-scale=1.0"
           KeywordElement.textContent = information.keyword;
           SentenceElement.textContent = information.sentence;
 
-          if (information.name === 'BLUECROSS') {
+          if (
+            information.name === 'BLUECROSS' ||
+            information.name === 'Reason Party'
+          ) {
             NameElement.style.transform = 'scale(0.6)';
           }
           if (
