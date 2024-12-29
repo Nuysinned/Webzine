@@ -149,6 +149,11 @@ maximum-scale=1.0, minimum-scale=1.0"
       CenterCircle.addEventListener('mouseout', () => {
         centerCircleBig = false;
       });
+      CenterCircle.addEventListener('touchstart', () => {
+        setTimeout(() => {
+          centerCircleBig = false;
+        }, 100);
+      });
 
       // DIAL MAKING AREA
       contents.forEach((value, index) => {
