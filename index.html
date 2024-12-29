@@ -8,7 +8,7 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, 
   maximum-scale=1.0, minimum-scale=1.0"
     />
-    <title>2024 움직임 | 메인</title>
+    <title>2024 움직임 | 현대청운고</title>
     <style>
       @font-face {
         font-family: 'SF_HambakSnow';
@@ -231,9 +231,14 @@
         z-index: 99;
       }
 
-      a {
+      #prevWebzine {
         color: rgb(134, 23, 134);
         text-decoration: none;
+      }
+
+      #Moving {
+        text-decoration: none;
+        color: inherit;
       }
     </style>
   </head>
@@ -251,15 +256,20 @@
     <div id="Title" class="opacity1 displayblock">
       <div id="MainMessage">
         2024 현대청운고 웹진
-        <span id="webzine" class="skin">[움직임]</span>
+        <span id="webzine" class="skin"
+          ><a href="./pages/message.html" target="_blank" id="Moving"
+            >[움직임]</a
+          ></span
+        >
       </div>
       <div id="WelcomeMessage">신입생 여러분의 입학을 축하합니다.</div>
     </div>
     <div id="BottomText" class="opacity1 brown displayblcok">
       버그 발생 시 새로고침하세요.<br /><a
+        id="prevWebzine"
         target="_blank"
         href="https://archive.hcu-webzine.com/"
-        >작년 웹진 보러가기</a
+        >[작년 웹진 보러가기]</a
       >
     </div>
     <img
