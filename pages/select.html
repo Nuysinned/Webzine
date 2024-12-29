@@ -2,6 +2,12 @@
 <html>
   <head>
     <link rel="stylesheet" href="../stylesheets/default.css" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, 
+maximum-scale=1.0, minimum-scale=1.0"
+    />
+
     <style>
       @font-face {
         font-family: 'SF_HambakSnow';
@@ -307,10 +313,7 @@
           KeywordElement.textContent = information.keyword;
           SentenceElement.textContent = information.sentence;
 
-          if (
-            information.name === 'BLUECROSS' ||
-            information.name === 'Reason Party'
-          ) {
+          if (information.name === 'BLUECROSS') {
             NameElement.style.transform = 'scale(0.6)';
           }
           if (
@@ -518,15 +521,63 @@
       // GOBACK AREA
       const GoBack = document.querySelector('#GoBack');
       GoBack.addEventListener('click', () => {
-        setTimeout(() => {
-          window.parent.goBack();
-        }, 200);
+        window.parent.goBack();
       });
       GoBack.addEventListener('touchstart', () => {
-        setTimeout(() => {
-          window.parent.goBack();
+        window.parent.goBack();
+      });
+
+      // MOUSE POSITION DETECTION AREA
+      document.addEventListener('mousemove', (e) => {
+        const iframe = window.frameElement;
+        const iframeRect = iframe.getBoundingClientRect();
+
+        window.parent.changeCurrentMouse(() => {
+          return {
+            x: e.pageX + iframeRect.left,
+            y: e.pageY + iframeRect.top,
+          };
         });
       });
+
+      document.addEventListener('touchmove', (e) => {
+        const iframe = window.frameElement;
+        const iframeRect = iframe.getBoundingClientRect();
+
+        window.parent.changeCurrentMouse(() => {
+          const touch = e.changedTouches[0];
+          return {
+            x: touch.pageX + iframeRect.left,
+            y: touch.pageY + iframeRect.top,
+          };
+        });
+      });
+
+      function downAction() {
+        window.parent.changePressedMouseToCurrent();
+      }
+
+      function upAction() {
+        window.parent.changePressedMouseToNone();
+      }
+
+      document.onmousedown = downAction;
+      document.onmouseup = upAction;
+
+      document.addEventListener('touchstart', (e) => {
+        const iframe = window.frameElement;
+        const iframeRect = iframe.getBoundingClientRect();
+
+        window.parent.changeCurrentMouse(() => {
+          const touch = e.changedTouches[0];
+          return {
+            x: touch.pageX + iframeRect.left,
+            y: touch.pageY + iframeRect.top,
+          };
+        });
+        downAction();
+      });
+      document.addEventListener('touchend', upAction);
     </script>
   </body>
 </html>

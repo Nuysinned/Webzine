@@ -8,7 +8,7 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, 
   maximum-scale=1.0, minimum-scale=1.0"
     />
-    <title>2024 현대청운고 [움직임]</title>
+    <title>2024 움직임 | 메인</title>
     <style>
       @font-face {
         font-family: 'SF_HambakSnow';
@@ -86,7 +86,7 @@
       #RightArrow {
         position: absolute;
         transform: translate(-50%, -50%);
-        transition: transform 0.2s !important;
+        transition: transform 0.2s, opacity 0.2s;
         top: 50%;
       }
 
@@ -100,14 +100,16 @@
         transform: translate(-50%, -50%) scale(1);
       }
 
-      iframe {
+      #Regular,
+      #Self,
+      #Select {
         display: block;
         position: absolute;
         top: 0;
         border: none;
         width: 100vw;
         height: 100%;
-        transition: left 0.3s, top 0.3s !important;
+        transition: left 0.3s !important;
       }
 
       #SoundOnOff {
@@ -115,7 +117,7 @@
         right: 40px;
         top: 20px;
         width: 60px;
-        transition: transform 0.2s !important;
+        transition: transform 0.2s, opacity 0.2s;
       }
 
       #SoundOnOff:hover {
@@ -136,16 +138,6 @@
         left: -100%;
       }
 
-      .top100 {
-        top: 100%;
-      }
-      .top0 {
-        top: 0;
-      }
-      .topminus100 {
-        top: -100%;
-      }
-
       .opacity0 {
         opacity: 0 !important;
       }
@@ -160,10 +152,8 @@
         display: block;
       }
 
-      #SoundOnOff,
       #BottomText,
-      #RightArrow,
-      #LeftArrow {
+      #Title {
         transition: opacity 0.2s;
       }
 
@@ -196,14 +186,63 @@
       #LookAll:active {
         transform: translate(-50%, -50%) scale(1) !important;
       }
+
+      #Popup {
+        z-index: 100;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+        position: absolute;
+        width: 700px;
+        height: 530px;
+        border: none;
+      }
+
+      @media (min-width: 700px) {
+        #Popup {
+          width: 700px;
+        }
+      }
+
+      @media (min-height: 530px) {
+        #Popup {
+          height: 530px;
+        }
+      }
+
+      @media (max-width: 700px) {
+        #Popup {
+          width: 100%;
+        }
+      }
+
+      @media (max-height: 530px) {
+        #Popup {
+          height: 100%;
+        }
+      }
+
+      #realBackground {
+        background-color: black;
+        opacity: 0.8;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 99;
+      }
     </style>
   </head>
   <body>
+    <div id="realBackground" class="displaynone"></div>
+
     <div id="background1" class="opacity1"></div>
     <div id="background2" class="opacity0"></div>
-    <iframe id="Select" class="top100"></iframe>
-    <iframe id="Regular" class="left0 top0" src="./pages/regular.html"></iframe>
-    <iframe id="Self" class="left100 top0" src="./pages/self.html"></iframe>
+
+    <iframe id="Popup" class="displaynone" src=""></iframe>
+
+    <iframe id="Select"></iframe>
+    <iframe id="Regular" class="left0" src="./pages/regular.html"></iframe>
+    <iframe id="Self" class="left100" src="./pages/self.html"></iframe>
     <div id="Title" class="opacity1 displayblock">
       <div id="MainMessage">
         2024 현대청운고 웹진
@@ -212,8 +251,7 @@
       <div id="WelcomeMessage">신입생 여러분의 입학을 축하합니다.</div>
     </div>
     <div id="BottomText" class="opacity1 brown displayblcok">
-      버튼을 잡고 다이얼이 걸릴 때까지 시계 방향으로 끝까지 돌리세요.<br />가운데를
-      누르면 전체 리스트가 나옵니다.
+      버그 발생 시 새로고침하세요.
     </div>
     <img
       id="RightArrow"
@@ -239,15 +277,41 @@
     <script src="./javascripts/Screen.js"></script>
     <script>
       // URL AREA
-      let url = {};
-      window.location.search.split('?').forEach((value, index) => {
-        if (index === 0) return;
-        const [one, two] = value.split('=');
-        url[one] = two;
-      });
+      // let url = {};
+      // window.location.search.split('?').forEach((value, index) => {
+      //   if (index === 0) return;
+      //   const [one, two] = value.split('=');
+      //   url[one] = two;
+      // });
+
+      // POPUP AREA
+      const Popup = document.querySelector('#Popup');
+      const realBackground = document.querySelector('#realBackground');
+      const thecookie = localStorage.getItem('thecookie');
+      if (thecookie === null) {
+        localStorage.setItem(
+          'thecookie',
+          JSON.stringify({
+            selected: 'nothing',
+            current: new Date().getTime(),
+          })
+        );
+        Popup.src = './pages/popup.html';
+        Popup.classList.remove('displaynone');
+        realBackground.classList.remove('displaynone');
+      } else if (JSON.parse(thecookie).selected === 'oneday') {
+        if (new Date().getTime() - JSON.parse(thecookie).current >= 86400000) {
+          Popup.src = './pages/popup.html';
+          Popup.classList.remove('displaynone');
+          realBackground.classList.remove('displaynone');
+        }
+      } else if (JSON.parse(thecookie).selected === 'nothing') {
+        Popup.src = './pages/popup.html';
+        Popup.classList.remove('displaynone');
+        realBackground.classList.remove('displaynone');
+      }
 
       // GLOBAL VARIABLES AREA
-      console.log(window.location.search);
       let sound = 'off';
       const Regular = document.querySelector('#Regular');
       const Self = document.querySelector('#Self');
@@ -260,13 +324,26 @@
       let main = 'Regular';
       let moved = false;
 
+      let currentMouse = { x: -1, y: -1 };
+      let pressedMouse = { x: -1, y: -1 };
+      let standardTop = 0;
+      let variation = 0;
+
       // INITIONAL SETTING
-      if (url.from === 'RegularDial') {
-        main = 'Regular';
-      }
-      if (url.from === 'SelfDial') {
-        main = 'Self';
-      }
+      // if (url.from === 'RegularDial') {
+      //   main = 'Regular';
+      // }
+      // if (url.from === 'SelfDial') {
+      //   main = 'Self';
+      // }
+
+      setInterval(() => {
+        Regular.style.top = standardTop + 'px';
+        Regular.style.top = standardTop + 'px';
+        Self.style.top = standardTop + 'px';
+        Self.style.top = standardTop + 'px';
+        Select.style.top = Screen.height + standardTop + 'px';
+      });
 
       // TITLE SIZE & LOCATION AREA
       const Title = document.querySelector('#Title');
@@ -331,6 +408,9 @@
 
       // EVENTLISTENER RUNNER AREA
       window.addEventListener('resize', () => {
+        if (moved === true) {
+          standardTop = -Screen.height;
+        }
         changeTitle();
         changeBottom();
         changeArrows();
@@ -402,13 +482,6 @@
 
       // FUNCTION THAT THE CHILDREN WILL USE
       function goto(string) {
-        Regular.classList.remove('top0');
-        Regular.classList.add('topminus100');
-        Self.classList.remove('top0');
-        Self.classList.add('topminus100');
-        Select.classList.remove('top100');
-        Select.classList.add('top0');
-
         Title.classList.remove('opacity1');
         Title.classList.add('opacity0');
         BottomText.classList.remove('opacity1');
@@ -426,6 +499,20 @@
         Select.src = './pages/select.html';
 
         moved = true;
+
+        const gotoInterval = setInterval(() => {
+          standardTop = standardTop + (-Screen.height - standardTop) / 20;
+          if (Math.abs(standardTop + Screen.height) < 1) {
+            const innerInterval = setInterval(() => {
+              if (moved === true) {
+                standardTop = -Screen.height + variation;
+              } else {
+                clearInterval(innerInterval);
+              }
+            });
+            clearInterval(gotoInterval);
+          }
+        });
 
         setTimeout(() => {
           Title.classList.remove('displayblock');
@@ -445,21 +532,18 @@
         };
       }
 
-      function goBack() {
+      function goBack(original = true) {
         Title.classList.remove('displaynone');
         Title.classList.add('displayblock');
+        BottomText.classList.remove('displaynone');
+        BottomText.classList.add('displayblock');
 
-        Regular.classList.remove('topminus100');
-        Regular.classList.add('top0');
-        Self.classList.remove('topminus100');
-        Self.classList.add('topminus0');
-        Select.classList.remove('top0');
-        Select.classList.add('top100');
-
-        Title.classList.remove('opacity0');
-        Title.classList.add('opacity1');
-        BottomText.classList.remove('opacity0');
-        BottomText.classList.add('opacity1');
+        setTimeout(() => {
+          Title.classList.remove('opacity0');
+          Title.classList.add('opacity1');
+          BottomText.classList.remove('opacity0');
+          BottomText.classList.add('opacity1');
+        }, 100);
         if (main === 'Regular') {
           RightArrow.classList.remove('opacity0');
           RightArrow.classList.add('opacity1');
@@ -477,52 +561,97 @@
         LookAll.classList.remove('opacity0');
         LookAll.classList.add('opacity1');
 
-        moved = false;
+        if (original) {
+          moved = false;
+          const gobackInterval = setInterval(() => {
+            standardTop = standardTop - standardTop / 20;
+            if (Math.abs(standardTop) < 1) {
+              standardTop = 0;
+              clearInterval(gobackInterval);
+            }
+          });
+        }
 
         setTimeout(() => {
           Select.src = '';
         }, 500);
       }
 
-      // IOS SCROLL AREA
-      let currentMouse = { x: -1, y: -1 };
-      let pressedMouse = { x: -1, y: -1 };
-      document.addEventListener('mousemove', (e) => {
-        currentMouse = { x: e.pageX, y: e.pageY };
-      });
-      document.addEventListener('touchmove', (e) => {
-        const touch = e.changedTouches[0];
-        currentMouse.x = touch.pageX;
-        currentMouse.y = touch.pageY;
-      });
+      function changeCurrentMouse(func) {
+        currentMouse = func();
+      }
 
-      function downAction() {
+      function changePressedMouseToCurrent() {
         pressedMouse = { ...currentMouse };
       }
 
-      function upAction() {
-        pressedMouse = { x: -1, y: -1 };
+      function changePressedMouseToNone() {
+        if (currentMouse.y - pressedMouse.y > Screen.height * 0.35) {
+          pressedMouse = { x: -2, y: -2 };
+        } else {
+          pressedMouse = { x: -3, y: -3 };
+        }
       }
 
-      document.onmousedown = downAction;
-      document.onmouseup = upAction;
-
-      document.addEventListener('touchstart', (e) => {
-        const touch = e.changedTouches[0];
-        currentMouse.x = touch.pageX;
-        currentMouse.y = touch.pageY;
-        downAction();
-      });
-      document.addEventListener('touchend', upAction);
-
       setInterval(() => {
-        if (moved === true) {
-          // 아이폰스러운 스크롤 구현하는 곳
+        if (pressedMouse.x === -1) {
+          variation = 0;
+        } else if (pressedMouse.x === -2) {
+          pressedMouse = { x: -4, y: -4 };
+          goBack(false);
+          const pressedMouseX2Interval = setInterval(() => {
+            variation = Screen.height - (Screen.height - variation) * 0.95;
+
+            if (Math.abs(variation - Screen.height) < 1) {
+              moved = false;
+              pressedMouse = { x: -1, y: -1 };
+              variation = 0;
+              standardTop = 0;
+              clearInterval(pressedMouseX2Interval);
+            }
+          });
+        } else if (pressedMouse.x === -3) {
+          pressedMouse = { x: -4, y: -4 };
+          const pressedMouseX3Interval = setInterval(() => {
+            variation = variation * 0.95;
+
+            if (Math.abs(variation) < 1) {
+              pressedMouse = { x: -1, y: -1 };
+              variation = 0;
+              clearInterval(pressedMouseX3Interval);
+            }
+          });
+        } else if (pressedMouse.x === -4) {
+        } else {
+          if (
+            Math.abs(
+              (currentMouse.y - pressedMouse.y) /
+                (currentMouse.x - pressedMouse.x)
+            ) > 1 &&
+            currentMouse.y > pressedMouse.y
+          ) {
+            variation = (currentMouse.y - pressedMouse.y) * 0.8;
+          }
         }
       });
 
-      window.addEventListener('popstate', (e) => {
-        goBack();
+      function closePopup(value) {
+        Popup.remove();
+        realBackground.remove();
+        localStorage.setItem(
+          'thecookie',
+          JSON.stringify({
+            selected: value,
+            current: new Date().getTime(),
+          })
+        );
+      }
+
+      // 뒤로가기 event AREA
+      window.addEventListener('popstate', () => {
+        if (moved) {
+          goBack();
+        }
       });
     </script>
   </body>
