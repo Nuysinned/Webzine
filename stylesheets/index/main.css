@@ -8,7 +8,7 @@ body {
 #background1 {
   position: absolute;
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   background-image: url('../../images/vintage.jpg');
   filter: blur(4px);
   background-size: cover;
@@ -21,7 +21,7 @@ body {
 #background2 {
   position: absolute;
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   background-image: url('../../images/vintage2.jpg');
   filter: blur(4px);
   background-size: cover;
@@ -103,7 +103,7 @@ body {
 
 .TheDials {
   min-width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   position: relative;
   scroll-snap-align: center;
 }
@@ -111,7 +111,7 @@ body {
 #DialsBox {
   display: flex;
   position: absolute;
-  height: 100vh;
+  height: 100dvh;
   width: 100vw;
   overflow-y: hidden;
   overflow-x: scroll;
@@ -140,5 +140,5 @@ body {
 }
 
 .goawayForDialsBox {
-  top: -100vh !important;
+  top: -100dvh !important;
 }

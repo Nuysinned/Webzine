@@ -8,7 +8,7 @@ body {
 #Home {
   display: flex;
   flex-direction: row;
-  height: 100vh;
+  height: 100dvh;
   overflow-y: hidden;
   align-items: center;
   gap: 5%;
@@ -184,7 +184,7 @@ img {
 #background1 {
   position: absolute;
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   background-image: url('../../images/vintage.jpg');
   filter: blur(4px);
   background-size: cover;
@@ -196,7 +196,7 @@ img {
 #background2 {
   position: absolute;
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   background-image: url('../../images/vintage2.jpg');
   filter: blur(4px);
   background-size: cover;
@@ -214,12 +214,12 @@ img {
 
 #Mom {
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   position: absolute;
 }
 
 .init {
-  transform: translate(0, 100vh);
+  transform: translate(0, 100dvh);
 }
 
 .showing {
