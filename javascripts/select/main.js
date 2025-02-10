@@ -393,3 +393,6 @@ setTimeout(() => {
   WhereIsHere.classList.remove('opacity0');
   Search.classList.remove('opacity0');
 });
+
+// 제목 바꾸기
+document.title = urlParams.target + ' | 2024 움직임';
