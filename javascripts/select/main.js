@@ -353,6 +353,7 @@ function upAction() {
       difference += (Screen.height * 0.9 - difference) / 20;
       Mom.style.top = difference + 'px';
       if (Screen.height * 0.9 - difference < 10) {
+        // window.location.href = `/?return=true&where=${urlParams.prevPage}&sound=${urlParams.sound}`
         history.back();
         clearInterval(interval);
       }

@@ -168,10 +168,21 @@ function AllInvisibleAnimation(special) {
       special !== '모든동아리'
         ? selected
         : special
-    }&prevPage=${currentScroll === 0 ? 'regular' : 'self'}&sound=${sound}`;
+    }&prevPage=${currentScroll === 0 ? 'regular' : 'self'}`;
   }, 300);
 }
 
 AllClubs.addEventListener('click', () => {
   AllInvisibleAnimation('모든동아리');
 });
+
+window.onpageshow = function (event) {
+  if (
+    event.persisted ||
+    (window.performance && window.performance.navigation.type == 2)
+  ) {
+    window.location.reload();
+  }
+};
+// THANKS FOR
+// https://velog.io/@dio3651/javascript-%EB%92%A4%EB%A1%9C%EA%B0%80%EA%B8%B0%EC%8B%9C-%EC%83%88%EB%A1%9C%EA%B3%A0%EC%B9%A8
