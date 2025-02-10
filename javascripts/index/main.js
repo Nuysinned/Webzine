@@ -155,7 +155,7 @@ function AllInvisibleAnimation(special) {
   SoundOnOff.classList.add('goaway');
   DialsBox.classList.add('goawayForDialsBox');
   setTimeout(() => {
-    history.pushState(
+    history.replaceState(
       null,
       null,
       `/?return=true&where=${
