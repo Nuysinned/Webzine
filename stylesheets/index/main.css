@@ -1,0 +1,144 @@
+body {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+#background1 {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../../images/vintage.jpg');
+  filter: blur(4px);
+  background-size: cover;
+  transition: opacity 0.5s;
+  top: 50%;
+  left: 50%;
+  transform: scale(1.02) translate(-50%, -50%);
+}
+
+#background2 {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../../images/vintage2.jpg');
+  filter: blur(4px);
+  background-size: cover;
+  top: 50%;
+  left: 50%;
+  transform: scale(1.02) translate(-50%, -50%);
+}
+
+#Title {
+  font-family: 'SF_HambakSnow';
+  position: absolute;
+  transform: translate(-50%, -50%);
+  filter: blur(0px);
+  left: 50%;
+  text-align: center;
+  width: 100%;
+  color: white;
+}
+
+#webzine {
+  transition: color 0.5s;
+}
+
+.skin {
+  color: rgb(255, 211, 154);
+}
+.blue {
+  color: rgb(148, 180, 240);
+}
+
+#BottomText {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  font-family: 'SF_HambakSnow';
+  text-align: center;
+  filter: blur(0px);
+}
+#AllClubs {
+  transition: color 0.5s;
+}
+#AllClubs:hover {
+  cursor: pointer;
+}
+.brown {
+  color: brown;
+}
+.green {
+  color: rgb(0, 159, 154);
+}
+
+#SoundOnOff {
+  position: absolute;
+  right: 40px;
+  top: 20px;
+  width: 60px;
+  filter: blur(0px);
+}
+
+#SoundOnOff:hover {
+  transform: scale(1.3);
+}
+
+#SoundOnOff:active {
+  transform: scale(1);
+}
+
+.opacity0 {
+  opacity: 0 !important;
+}
+.opacity1 {
+  opacity: 1 !important;
+}
+
+#prevWebzine {
+  color: rgb(134, 23, 134);
+  text-decoration: none;
+}
+
+.TheDials {
+  min-width: 100vw;
+  height: 100vh;
+  position: relative;
+  scroll-snap-align: center;
+}
+
+#DialsBox {
+  display: flex;
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  -ms-overflow-style: none;
+  top: 0;
+}
+
+#DialsBox::-webkit-scrollbar {
+  display: none;
+}
+
+#Scrollviewer {
+  display: flex;
+  justify-content: center;
+}
+
+.dot {
+  color: white;
+  transform: scale(1.2);
+}
+
+.goaway {
+  opacity: 0 !important;
+  filter: blur(10px) !important;
+}
+
+.goawayForDialsBox {
+  top: -100vh !important;
+}
